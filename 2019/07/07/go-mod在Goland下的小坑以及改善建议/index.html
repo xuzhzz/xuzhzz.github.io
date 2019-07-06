@@ -104,25 +104,25 @@
 
 
 
-  <meta name="description" content="一个男人的博客">
-<meta name="keywords" content="此处是关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="test-page">
-<meta property="og:url" content="http://yoursite.com/test-page/index.html">
+  <meta name="description" content="背景在本地跑了个kratos的demo，代码是可以成功运行起来的。但是用goland打开时无法import到go mod下载到$GOPATH/pkg/mod下的包（具体表现在发红，报错无法import之类的）。google之，发现goland要设置preference-&amp;gt;Go-&amp;gt;Go Modules(vgo)-&amp;gt;Enable Go Modules(vgo) intergratio">
+<meta name="keywords" content="golang,goland,go mod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go mod在Goland下的小坑以及改善建议">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/go-mod在Goland下的小坑以及改善建议/index.html">
 <meta property="og:site_name" content="PullingWoolMan">
-<meta property="og:description" content="一个男人的博客">
+<meta property="og:description" content="背景在本地跑了个kratos的demo，代码是可以成功运行起来的。但是用goland打开时无法import到go mod下载到$GOPATH/pkg/mod下的包（具体表现在发红，报错无法import之类的）。google之，发现goland要设置preference-&amp;gt;Go-&amp;gt;Go Modules(vgo)-&amp;gt;Enable Go Modules(vgo) intergratio">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-26T08:11:41.000Z">
+<meta property="og:updated_time" content="2019-07-06T17:36:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test-page">
-<meta name="twitter:description" content="一个男人的博客">
+<meta name="twitter:title" content="go mod在Goland下的小坑以及改善建议">
+<meta name="twitter:description" content="背景在本地跑了个kratos的demo，代码是可以成功运行起来的。但是用goland打开时无法import到go mod下载到$GOPATH/pkg/mod下的包（具体表现在发红，报错无法import之类的）。google之，发现goland要设置preference-&amp;gt;Go-&amp;gt;Go Modules(vgo)-&amp;gt;Enable Go Modules(vgo) intergratio">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/test-page/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/07/go-mod在Goland下的小坑以及改善建议/">
 
 
 
@@ -132,7 +132,7 @@
   };
 </script>
 
-  <title>test-page | PullingWoolMan</title>
+  <title>go mod在Goland下的小坑以及改善建议 | PullingWoolMan</title>
   
 
 
@@ -261,19 +261,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -300,45 +287,173 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/go-mod在Goland下的小坑以及改善建议/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zihan Xu">
+      <meta itemprop="description" content="一个男人的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PullingWoolMan">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">test-page
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">go mod在Goland下的小坑以及改善建议
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-07 01:07:56 / Modified: 01:36:00" itemprop="dateCreated datePublished" datetime="2019-07-07T01:07:56+08:00">2019-07-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在本地跑了个kratos的demo，代码是可以成功运行起来的。但是用goland打开时无法import到go mod下载到$GOPATH/pkg/mod下的包（具体表现在发红，报错无法import之类的）。google之，发现goland要设置<code>preference-&gt;Go-&gt;Go Modules(vgo)-&gt;Enable Go Modules(vgo) intergration</code>勾选上。回到Goland，直接哭了，情况更加严重，Goland连项目自己本身的包都无法import了。</p>
+<h2 id="问题发现以及解决"><a href="#问题发现以及解决" class="headerlink" title="问题发现以及解决"></a>问题发现以及解决</h2><p>当设置环境变量GO111MODULE=on时，是默认从mod里查找包的，当然也会从src下找。个人习惯把项目建在$GOPATH/src下，可能Goland蒙蔽了，觉得我不按照套路出牌，怎么开启了go mod了还在GOPATH下干活。</p>
+<p>解决办法:</p>
+<blockquote>
+<p>1.在GOPATH之外 mkdir GoWorkSpace<br>  2.mv $GOPATH/src/yourProject .</p>
+</blockquote>
+<p>此时我的Goland是能正常显示import。</p>
+<h2 id="go-mod小贴示"><a href="#go-mod小贴示" class="headerlink" title="go mod小贴示"></a>go mod小贴示</h2><p>因为墙的原因，一些包无法下载，假如你没有梯子的话还是挺蛋疼的。有了go mod也是可以解决的，设置环境变量 <code>GOPROXY=https://goproxy.io</code> 一切迎刃而解美滋滋下载包包。</p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/golang/" rel="tag"># golang</a>
+          
+            <a href="/tags/goland/" rel="tag"># goland</a>
+          
+            <a href="/tags/go-mod/" rel="tag"># go mod</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/27/使用教程/" rel="next" title="hexo博客使用教程">
+                <i class="fa fa-chevron-left"></i> hexo博客使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -368,8 +483,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -447,6 +571,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题发现以及解决"><span class="nav-number">2.</span> <span class="nav-text">问题发现以及解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go-mod小贴示"><span class="nav-number">3.</span> <span class="nav-text">go mod小贴示</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
