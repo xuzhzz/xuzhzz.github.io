@@ -104,24 +104,25 @@
 
 
 
-  <meta name="description" content="一个男人的博客">
-<meta name="keywords" content="此处是关键字">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PullingWoolMan">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="特性 多维度的数据模型针对监控指标提供label来进行多维度的组合 方便部署和维护二进制、docker，基本不以来外部组件可以独立部署，k8s兄弟 灵活的数据采集pull、push 强大的查询语言PromQL  监控指标定义&amp;lt;metric name&amp;gt;{&amp;lt;label1 name&amp;gt;=&amp;lt;label1 value&amp;gt;, &amp;lt;label2 name&amp;gt;=&amp;lt;la">
+<meta name="keywords" content="Prometheus,监控,golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prometheus介绍">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/Prometheus介绍/index.html">
 <meta property="og:site_name" content="PullingWoolMan">
-<meta property="og:description" content="一个男人的博客">
+<meta property="og:description" content="特性 多维度的数据模型针对监控指标提供label来进行多维度的组合 方便部署和维护二进制、docker，基本不以来外部组件可以独立部署，k8s兄弟 灵活的数据采集pull、push 强大的查询语言PromQL  监控指标定义&amp;lt;metric name&amp;gt;{&amp;lt;label1 name&amp;gt;=&amp;lt;label1 value&amp;gt;, &amp;lt;label2 name&amp;gt;=&amp;lt;la">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-07T17:26:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PullingWoolMan">
-<meta name="twitter:description" content="一个男人的博客">
+<meta name="twitter:title" content="Prometheus介绍">
+<meta name="twitter:description" content="特性 多维度的数据模型针对监控指标提供label来进行多维度的组合 方便部署和维护二进制、docker，基本不以来外部组件可以独立部署，k8s兄弟 灵活的数据采集pull、push 强大的查询语言PromQL  监控指标定义&amp;lt;metric name&amp;gt;{&amp;lt;label1 name&amp;gt;=&amp;lt;label1 value&amp;gt;, &amp;lt;label2 name&amp;gt;=&amp;lt;la">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/07/Prometheus介绍/">
 
 
 
@@ -131,7 +132,7 @@
   };
 </script>
 
-  <title>PullingWoolMan</title>
+  <title>Prometheus介绍 | PullingWoolMan</title>
   
 
 
@@ -179,8 +180,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -222,7 +222,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -284,9 +284,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -318,10 +318,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/07/Prometheus介绍/" class="post-title-link" itemprop="url">Prometheus介绍</a>
+          <h1 class="post-title" itemprop="name headline">Prometheus介绍
+
               
             
           </h1>
@@ -396,9 +394,7 @@
       
 
       
-        
-          
-            <h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+        <h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
 <li>多维度的数据模型<br>针对监控指标提供label来进行多维度的组合</li>
 <li>方便部署和维护<br>二进制、docker，基本不以来外部组件可以独立部署，k8s兄弟</li>
 <li>灵活的数据采集<br>pull、push</li>
@@ -446,8 +442,6 @@
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kratos-demo/internal/server/http/middleware.go</span></span><br><span class="line"><span class="comment">// 中间件定义</span></span><br><span class="line">.....</span><br><span class="line"><span class="keyword">import</span> <span class="string">"github.com/bilibili/kratos/pkg/stat/prom"</span></span><br><span class="line">.....</span><br><span class="line"><span class="keyword">type</span> Exporter <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	p *prom.Prom</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *Exporter)</span> <span class="title">Exporter</span><span class="params">(ctx *bm.Context)</span></span>  &#123;</span><br><span class="line">	namex := <span class="string">"http_"</span> + strings.ToLower(ctx.Request.Method) + <span class="string">"_"</span> + e.name + <span class="string">"_total"</span></span><br><span class="line">	e.p.Incr(namex)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
 <p>server.go<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// kratos-demo/internal/server/http/server.go</span></span><br><span class="line"><span class="comment">// 将initRouter改写注册中间件进去</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"github.com/bilibili/kratos/pkg/stat/prom"</span></span><br><span class="line">......</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">initRouter</span><span class="params">(e *bm.Engine)</span></span> &#123;</span><br><span class="line">	e.Ping(ping)</span><br><span class="line">	exp := &amp;Exporter&#123;<span class="string">"xuzh"</span>, prom.New().WithCounter(<span class="string">"xuzh"</span>, []<span class="keyword">string</span>&#123;<span class="string">"name"</span>&#125;)&#125;</span><br><span class="line">	g := e.Group(<span class="string">"/kratos-rpc-demo"</span>,exp.Exporter)</span><br><span class="line">	&#123;</span><br><span class="line">		g.GET(<span class="string">"/start"</span>, howToStart)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">.......</span><br></pre></td></tr></table></figure></p>
 
-          
-        
       
     </div>
 
@@ -468,325 +462,40 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/go-mod在Goland下的小坑以及改善建议/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zihan Xu">
-      <meta itemprop="description" content="一个男人的博客">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PullingWoolMan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/07/go-mod在Goland下的小坑以及改善建议/" class="post-title-link" itemprop="url">go mod在Goland下的小坑以及改善建议</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-07 01:07:56 / Modified: 01:36:00" itemprop="dateCreated datePublished" datetime="2019-07-07T01:07:56+08:00">2019-07-07</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Prometheus/" rel="tag"># Prometheus</a>
           
-            
+            <a href="/tags/监控/" rel="tag"># 监控</a>
           
-
+            <a href="/tags/golang/" rel="tag"># golang</a>
           
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在本地跑了个kratos的demo，代码是可以成功运行起来的。但是用goland打开时无法import到go mod下载到$GOPATH/pkg/mod下的包（具体表现在发红，报错无法import之类的）。google之，发现goland要设置<code>preference-&gt;Go-&gt;Go Modules(vgo)-&gt;Enable Go Modules(vgo) intergration</code>勾选上。回到Goland，直接哭了，情况更加严重，Goland连项目自己本身的包都无法import了。</p>
-<h2 id="问题发现以及解决"><a href="#问题发现以及解决" class="headerlink" title="问题发现以及解决"></a>问题发现以及解决</h2><p>当设置环境变量GO111MODULE=on时，是默认从mod里查找包的，当然也会从src下找。个人习惯把项目建在$GOPATH/src下，可能Goland蒙蔽了，觉得我不按照套路出牌，怎么开启了go mod了还在GOPATH下干活。</p>
-<p>解决办法:</p>
-<blockquote>
-<p>1.在GOPATH之外 mkdir GoWorkSpace<br>  2.mv $GOPATH/src/yourProject .</p>
-</blockquote>
-<p>此时我的Goland是能正常显示import。</p>
-<h2 id="go-mod小贴示"><a href="#go-mod小贴示" class="headerlink" title="go mod小贴示"></a>go mod小贴示</h2><p>因为墙的原因，一些包无法下载，假如你没有梯子的话还是挺蛋疼的。有了go mod也是可以解决的，设置环境变量 <code>GOPROXY=https://goproxy.io</code> 一切迎刃而解美滋滋下载包包。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/使用教程/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zihan Xu">
-      <meta itemprop="description" content="一个男人的博客">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PullingWoolMan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/27/使用教程/" class="post-title-link" itemprop="url">hexo博客使用教程</a>
-              
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
+              <a href="/2019/07/07/go-mod在Goland下的小坑以及改善建议/" rel="next" title="go mod在Goland下的小坑以及改善建议">
+                <i class="fa fa-chevron-left"></i> go mod在Goland下的小坑以及改善建议
+              </a>
             
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-27 19:50:52 / Modified: 20:18:16" itemprop="dateCreated datePublished" datetime="2019-06-27T19:50:52+08:00">2019-06-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/教程/" itemprop="url" rel="index"><span itemprop="name">教程</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="面向自己"><a href="#面向自己" class="headerlink" title="面向自己"></a>面向自己</h2><p>老是忘记怎么hexo用法，有时久不使用了对应本地的路径<code>$HOME/myproject/hexo</code>也找半天，在此记录一下防止自己遗忘。</p>
-<h2 id="hexo基本用法"><a href="#hexo基本用法" class="headerlink" title="hexo基本用法"></a>hexo基本用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;post title&quot; 新建文章</span><br><span class="line">hexo g 部署</span><br><span class="line">hexo d 发布</span><br><span class="line">hexo g -d 部署发布组合技</span><br><span class="line">hexo s 运行本地站点，建议先部署在本地查看无误后再发布。</span><br></pre></td></tr></table></figure>
-<h2 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h2><p>待补充</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -796,160 +505,15 @@
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zihan Xu">
-      <meta itemprop="description" content="一个男人的博客">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PullingWoolMan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/26/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-26 15:55:24" itemprop="dateCreated datePublished" datetime="2018-12-26T15:55:24+08:00">2018-12-26</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -970,8 +534,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1053,6 +626,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#特性"><span class="nav-number">1.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#监控指标定义"><span class="nav-number">1.1.</span> <span class="nav-text">监控指标定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据模型"><span class="nav-number">1.2.</span> <span class="nav-text">数据模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各组件介绍"><span class="nav-number">2.</span> <span class="nav-text">各组件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prometheus-Server"><span class="nav-number">2.1.</span> <span class="nav-text">Prometheus Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exporter"><span class="nav-number">2.2.</span> <span class="nav-text">exporter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AlertManager"><span class="nav-number">2.3.</span> <span class="nav-text">AlertManager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可视化图表界面"><span class="nav-number">2.4.</span> <span class="nav-text">可视化图表界面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kratos数据模型相关接口"><span class="nav-number">3.</span> <span class="nav-text">kratos数据模型相关接口</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1181,6 +771,10 @@
   
 
   
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
 
   
 
